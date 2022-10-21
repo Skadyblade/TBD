@@ -1,18 +1,18 @@
-1)
+-- 1
 DO language plpgsql $$
 BEGIN
   RAISE NOTICE 'Hello, World!';
 END
 $$;
-
-2)
+ 
+-- 2
 DO language plpgsql $$
 BEGIN
   RAISE NOTICE '%', now()::date;
 END
 $$;
 
-3)
+-- 3
 DO language plpgsql $$
 DECLARE
   x int := 10;
@@ -25,11 +25,11 @@ BEGIN
   RAISE NOTICE 'x mod y = %', (x%y);
 END
 $$;
-
-4)
+ 
+-- 4
 DO language plpgsql $$
 DECLARE
-  x int := ?;
+  x int := 5;
 BEGIN
   IF x = 5 THEN RAISE NOTICE 'Отлично!';
   	ELSIF x = 4 THEN RAISE NOTICE 'Хорошо';
@@ -39,10 +39,10 @@ BEGIN
   END IF;
 END
 $$;
-
+ 
 DO language plpgsql $$
 DECLARE
-  x int := ?;
+  x int := 5;
 BEGIN
   CASE x
   	WHEN 5 THEN RAISE NOTICE 'Отлично!';
@@ -53,8 +53,8 @@ BEGIN
   END CASE;
 END
 $$;
-
-5)
+ 
+-- 5
 DO language plpgsql $$
 DECLARE 
 	n int := 20;
@@ -65,7 +65,7 @@ BEGIN
 	END LOOP;
 END;
 $$;
-
+ 
 DO language plpgsql $$
 BEGIN
 	FOR i IN 20..30 LOOP
@@ -73,7 +73,7 @@ BEGIN
 	END LOOP;
 END;
 $$;
-
+ 
 DO language plpgsql $$
 DECLARE 
 	n int := 20;
@@ -87,25 +87,25 @@ BEGIN
 	END LOOP;
 END;
 $$;
-
-6)
+ 
+-- 6
 DO language plpgsql $$
 DECLARE 
 	n int := 12;
 BEGIN
 	WHILE n <> 1 LOOP
-		IF n % 2 == 0 THEN
+		IF n % 2 = 0 THEN
 			n = n / 2;
-			RAISE NOTICE '%', num;
+			RAISE NOTICE '%', n;
 		ELSE
 			n = n * 3 + 1;
-			RAISE NOTICE '%', num;
+			RAISE NOTICE '%', n;
 		END IF;
 	END LOOP;
 END;
 $$;
-
-7)
+ 
+-- 7
 CREATE OR REPLACE FUNCTION lucs_numbers(n int) RETURNS int
 AS $$
 DECLARE
@@ -122,8 +122,8 @@ BEGIN
 	RETURN L1;
 END
 $$ LANGUAGE plpgsql;
-
-8)
+ 
+-- 8
 CREATE OR REPLACE FUNCTION count_people_by_year(year int) RETURNS int
 AS $$
 DECLARE
@@ -135,9 +135,9 @@ BEGIN
 	RETURN people_count;
 END
 $$ LANGUAGE plpgsql;
-
-
-9)
+ 
+ 
+-- 9
 CREATE OR REPLACE FUNCTION count_people_by_eyes(eyes varchar) RETURNS int
 AS $$
 DECLARE
@@ -149,8 +149,8 @@ BEGIN
 	RETURN people_count;
 END
 $$ LANGUAGE plpgsql;
-
-10)
+ 
+-- 10
 CREATE OR REPLACE FUNCTION get_id_the_youngest() RETURNS int
 AS $$
 DECLARE
@@ -163,9 +163,9 @@ BEGIN
 	RETURN id_y;
 END
 $$ LANGUAGE plpgsql;
-
-
-11)
+ 
+ 
+-- 11
 CREATE OR REPLACE PROCEDURE get_people_by_bwi(IN x real)
 LANGUAGE plpgsql
 AS $$
@@ -180,14 +180,14 @@ BEGIN
 	END LOOP;
 END;
 $$;
-
-12)
+ 
+-- 12
 BEGIN;
 ALTER TABLE people ADD COLUMN family_ties VARCHAR(255);
 COMMIT;
 END;
-
-13)
+ 
+-- 13
 CREATE OR REPLACE PROCEDURE get_people_by_bwi(IN new_name varchar, new_surname varchar, new_birth_date DATE, 
 											  new_growth real, new_weight real, new_eyes varchar, new_hair varchar,
 											  new_family_ties varchar)
@@ -199,14 +199,14 @@ BEGIN
 	RAISE NOTICE 'Success insert at %', current_timestamp;
 END;
 $$;
-
-14)
+ 
+-- 14
 BEGIN;
 ALTER TABLE people ADD COLUMN update_at TIMESTAMP DEFAULT current_timestamp;
 COMMIT;
 END;
-
-15)
+ 
+-- 15
 CREATE OR REPLACE PROCEDURE update_characters(new_id int, new_growth real, new_weight real)
 LANGUAGE plpgsql
 AS $$
