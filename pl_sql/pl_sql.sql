@@ -221,8 +221,3 @@ BEGIN
 	RAISE NOTICE 'Success update at %', up;
 END;
 $$;
-Footer
-© 2022 GitHub, Inc.
-Footer navigation
-Terms
-Privacy
